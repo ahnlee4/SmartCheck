@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                         })
                         .setButtonDismiss("닫기")
                         .setUpdateFrom(UpdateFrom.GITHUB)
-                        .setGitHubUserAndRepo("ahnlee4", "JinGu_APK")
+                        .setGitHubUserAndRepo("ahnlee4", "SmartCheck")
                         .setDisplay(Display.DIALOG)
                         .showAppUpdated(true)
                         .start();
@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == REQUEST_INSTALL) {
-            String url = "https://github.com/ahnlee4/JinGu_APK/raw/master/app-debug.apk";
+            String url = "https://github.com/ahnlee4/SmartCheck/raw/master/app-debug.apk";
             updateApp = new UpdateApp(activity);
             updateApp.execute(url);
         }
