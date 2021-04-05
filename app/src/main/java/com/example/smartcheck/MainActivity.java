@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == REQUEST_INSTALL) {
-            String url = "https://github.com/ahnlee4/SmartCheck/raw/master/Jingu_"+lastversion+".apk";
+            String url = "https://github.com/ahnlee4/SmartCheck/raw/master/JinGu_"+lastversion+".apk";
             updateApp = new UpdateApp(activity);
             updateApp.execute(url);
         }
