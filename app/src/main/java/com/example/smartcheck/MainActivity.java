@@ -147,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (requestCode == REQUEST_INSTALL) {
             progressBar.setVisibility(View.VISIBLE);
-            String url = "https://github.com/ahnlee4/SmartCheck/raw/master/JinGu_"+lastversion.replace(".","_")+".apk";
+            String url = "https://github.com/ahnlee4/SmartCheck/apklist/raw/master/JinGu_"+lastversion.replace(".","_")+".apk";
             updateApp = new UpdateApp(activity);
             updateApp.execute(url);
         }else if (requestCode == REQUEST_UNINSTALL) {
