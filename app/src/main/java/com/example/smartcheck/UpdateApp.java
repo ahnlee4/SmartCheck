@@ -124,7 +124,7 @@ public class UpdateApp extends AsyncTask<String, Integer, String> {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setDataAndType(uri, "application/vnd.android.package-archive");
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        activity.startActivityForResult(intent, MainActivity.REQUEST_INSTALL);
+        activity.startActivityForResult(intent, MainActivity.REQUEST_UNINSTALL);
     }
 }
 

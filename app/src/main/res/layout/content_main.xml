@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
@@ -14,7 +15,7 @@
             android:text="업데이트 앱"
             android:textColor="@color/black"
             android:textStyle="bold"
-            android:textSize="18dp"
+            android:textSize="24dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
@@ -33,7 +34,7 @@
                     android:text="스마트 측정기"
                     android:textColor="@color/black"
                     android:textStyle="bold"
-                    android:textSize="16dp"
+                    android:textSize="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
                 <TextView
@@ -41,7 +42,7 @@
                     android:text="최신: 확인불가"
                     android:textColor="@color/black"
                     android:textStyle="bold"
-                    android:textSize="12dp"
+                    android:textSize="16dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
                 <TextView
@@ -49,7 +50,7 @@
                     android:text="설치됨: 확인불가"
                     android:textColor="@color/black"
                     android:textStyle="bold"
-                    android:textSize="12dp"
+                    android:textSize="16dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
@@ -65,7 +66,7 @@
                     android:text="업데이트"
                     android:textColor="@color/white"
                     android:textStyle="bold"
-                    android:textSize="16dp"
+                    android:textSize="20dp"
                     android:layout_width="120dp"
                     android:layout_height="match_parent"/>
             </LinearLayout>
@@ -85,21 +86,21 @@
                     android:text="작물 DB"
                     android:textColor="@color/black"
                     android:textStyle="bold"
-                    android:textSize="16dp"
+                    android:textSize="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
                 <TextView
                     android:text="최신: 확인불가"
                     android:textColor="@color/black"
                     android:textStyle="bold"
-                    android:textSize="12dp"
+                    android:textSize="16dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
                 <TextView
                     android:text="설치됨: 확인불가"
                     android:textColor="@color/black"
                     android:textStyle="bold"
-                    android:textSize="12dp"
+                    android:textSize="16dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
@@ -114,10 +115,23 @@
                     android:text="업데이트"
                     android:textColor="@color/white"
                     android:textStyle="bold"
-                    android:textSize="16dp"
+                    android:textSize="20dp"
                     android:layout_width="120dp"
                     android:layout_height="match_parent"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/progress"
+        android:visibility="gone"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ProgressBar
+            android:layout_centerInParent="true"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            tools:ignore="MissingConstraints" />
+    </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

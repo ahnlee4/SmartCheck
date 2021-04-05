@@ -24,6 +24,8 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     String version;
     TextView app_version;
     TextView app_last_version;
+    RelativeLayout progressBar;
 
     String lastversion = "";
     boolean isUpdate = false;
@@ -50,6 +53,13 @@ public class MainActivity extends AppCompatActivity {
         Button app_update = findViewById(R.id.app_update);
         app_version = findViewById(R.id.app_version);
         app_last_version = findViewById(R.id.app_last_version);
+        progressBar = findViewById(R.id.progress);
+
+        Uri uri = getIntent().getData();
+        if(uri!=null)
+            app_version.setText("설치됨: " + uri.toString().substring(uri.toString().indexOf("=")+1));
+        else
+            app_version.setText("설치됨: 확인불가");
 
         AppUpdaterUtils appUpdaterUtils = new AppUpdaterUtils(activity)
                 .setUpdateFrom(UpdateFrom.GITHUB)
@@ -136,9 +146,12 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == REQUEST_INSTALL) {
-            String url = "https://github.com/ahnlee4/SmartCheck/raw/master/JinGu_"+lastversion+".apk";
+            progressBar.setVisibility(View.VISIBLE);
+            String url = "https://github.com/ahnlee4/SmartCheck/raw/master/JinGu_"+lastversion.replace(".","_")+".apk";
             updateApp = new UpdateApp(activity);
             updateApp.execute(url);
+        }else if (requestCode == REQUEST_UNINSTALL) {
+            progressBar.setVisibility(View.GONE);
         }
     }
 }
