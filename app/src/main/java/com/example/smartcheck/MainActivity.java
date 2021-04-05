@@ -9,6 +9,8 @@ import android.os.Build;
 import android.os.Bundle;
 
 import com.github.javiersantos.appupdater.AppUpdater;
+import com.github.javiersantos.appupdater.AppUpdaterUtils;
+import com.github.javiersantos.appupdater.enums.AppUpdaterError;
 import com.github.javiersantos.appupdater.enums.Display;
 import com.github.javiersantos.appupdater.enums.UpdateFrom;
 
@@ -16,15 +18,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 
+import android.util.Log;
 import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     Activity activity;
     UpdateApp updateApp;
+    String version;
+    TextView app_version;
+    TextView app_last_version;
+
+    String lastversion = "";
+    boolean isUpdate = false;
 
     public static int REQUEST_INSTALL = 1;
     public static int REQUEST_UNINSTALL = 2;
@@ -38,6 +48,27 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         Button app_update = findViewById(R.id.app_update);
+        app_version = findViewById(R.id.app_version);
+        app_last_version = findViewById(R.id.app_last_version);
+
+        AppUpdaterUtils appUpdaterUtils = new AppUpdaterUtils(activity)
+                .setUpdateFrom(UpdateFrom.GITHUB)
+                .setGitHubUserAndRepo("ahnlee4", "SmartCheck")
+                .withListener(new AppUpdaterUtils.UpdateListener() {
+                    @Override
+                    public void onSuccess(com.github.javiersantos.appupdater.objects.Update update, Boolean isUpdateAvailable) {
+                        lastversion = update.getLatestVersion();
+                        isUpdate = isUpdateAvailable;
+                        app_last_version.setText("최신: " + lastversion.replace("_","."));
+                    }
+
+                    @Override
+                    public void onFailed(AppUpdaterError error) {
+                        Log.d("AppUpdater Error", "Something went wrong");
+                    }
+                });
+        appUpdaterUtils.start();
+
         app_update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -105,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == REQUEST_INSTALL) {
-            String url = "https://github.com/ahnlee4/SmartCheck/raw/master/app-debug.apk";
+            String url = "https://github.com/ahnlee4/SmartCheck/raw/master/Jingu_"+lastversion+".apk";
             updateApp = new UpdateApp(activity);
             updateApp.execute(url);
         }
