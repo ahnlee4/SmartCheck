@@ -2,6 +2,7 @@ package com.example.smartcheck;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -18,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 
@@ -27,6 +29,13 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
     Activity activity;
@@ -55,11 +64,11 @@ public class MainActivity extends AppCompatActivity {
         app_last_version = findViewById(R.id.app_last_version);
         progressBar = findViewById(R.id.progress);
 
-        Uri uri = getIntent().getData();
-        if(uri!=null)
-            app_version.setText("설치됨: " + uri.toString().substring(uri.toString().indexOf("=")+1));
-        else
+        try {
+            app_version.setText("설치됨: " + getIntent().getExtras().get("app_version").toString());
+        }catch (Exception e){
             app_version.setText("설치됨: 확인불가");
+        }
 
         AppUpdaterUtils appUpdaterUtils = new AppUpdaterUtils(activity)
                 .setUpdateFrom(UpdateFrom.GITHUB)
@@ -147,11 +156,25 @@ public class MainActivity extends AppCompatActivity {
 
         if (requestCode == REQUEST_INSTALL) {
             progressBar.setVisibility(View.VISIBLE);
-            String url = "https://github.com/ahnlee4/SmartCheck/apklist/raw/master/JinGu_"+lastversion.replace(".","_")+".apk";
+            String url = "https://github.com/ahnlee4/SmartCheck/raw/master/apklist/JinGu_"+lastversion.replace(".","_")+".apk";
             updateApp = new UpdateApp(activity);
             updateApp.execute(url);
         }else if (requestCode == REQUEST_UNINSTALL) {
             progressBar.setVisibility(View.GONE);
         }
     }
+
+
+    public String getSibiPath() {
+        File dir = new File(Environment.getExternalStorageDirectory() + "/SIBI");
+
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+
+        System.out.println(dir.getPath());
+
+        return dir.getPath();
+    }
+
 }
