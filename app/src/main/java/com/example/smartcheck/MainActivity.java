@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
     String version;
     TextView app_version;
     TextView app_last_version;
+    TextView db_version;
+    TextView db_last_version;
     RelativeLayout progressBar;
 
     String lastversion = "";
@@ -112,6 +114,20 @@ public class MainActivity extends AppCompatActivity {
                         .setDisplay(Display.DIALOG)
                         .showAppUpdated(true)
                         .start();
+            }
+        });
+
+
+        Button db_update = findViewById(R.id.db_update);
+        db_version = findViewById(R.id.db_version);
+        db_last_version = findViewById(R.id.db_last_version);
+
+        db_update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = "https://github.com/ahnlee4/SmartCheck/raw/master/dblist/CROPMAP.txt";
+                DownloadDB downloadDB = new DownloadDB(activity);
+                downloadDB.execute(url, "CROPMAP.txt");
             }
         });
     }
