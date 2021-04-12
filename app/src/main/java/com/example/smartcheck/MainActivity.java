@@ -125,9 +125,19 @@ public class MainActivity extends AppCompatActivity {
         db_update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url = "https://github.com/ahnlee4/SmartCheck/raw/master/dblist/CROPMAP.txt";
-                DownloadDB downloadDB = new DownloadDB(activity);
-                downloadDB.execute(url, "CROPMAP.txt");
+                String url_map = "https://github.com/ahnlee4/SmartCheck/raw/master/dblist/CROPMAP.txt";
+                DownloadDB downloadDB_map = new DownloadDB(activity);
+                downloadDB_map.execute(url_map, "CROPMAP.txt");
+
+                String url_fert = "https://github.com/ahnlee4/SmartCheck/raw/master/dblist/CROPFERT.txt";
+                DownloadDB downloadDB_fert = new DownloadDB(activity);
+                downloadDB_fert.execute(url_fert, "CROPFERT.txt");
+
+                String url_info = "https://github.com/ahnlee4/SmartCheck/raw/master/dblist/CROPINFO.txt";
+                DownloadDB downloadDB_info = new DownloadDB(activity);
+                downloadDB_info.execute(url_info, "CROPINFO.txt");
+
+                Toast.makeText(activity, "다운로드 완료", Toast.LENGTH_LONG).show();
             }
         });
     }
