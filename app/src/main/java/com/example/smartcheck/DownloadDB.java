@@ -48,6 +48,10 @@ public class DownloadDB extends AsyncTask<String, Integer, String> {
             lenghtOfFile = connection.getContentLength(); // 파일 크기를 가져옴
 
             String path = Environment.getExternalStorageDirectory() + "/SIBI/BackUp";
+            File dir = new File(path);
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
             outputFile = new File(path, apkurl[1]);
             if (outputFile.exists()) { // 기존 파일 존재시 삭제하고 다운로드
                 outputFile.delete();
